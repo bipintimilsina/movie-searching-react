@@ -7,32 +7,31 @@ import "./index.css";
 
 export default function App() {
   const [allMovieData, setallMovieData] = useState([]);
-  const [searchMovie, setSearchMovie] = useState();
+  const [searchMovie, setSearchMovie] = useState('');
   const [loading, setLoading] = useState(false);
 
   const fetchMovieData = async () => {
+    if (!searchMovie.trim()) return; // Prevent empty searches
+    setLoading(true);
     try {
-      // const res = await fetch(
-        // `http://www.omdbapi.com/?s=${searchMovie}&apikey=[1b8d7e12]&`
-      // );
-setLoading(true)
-      const res = await fetch(
+      let res = await fetch(
         `https://omdbapi.com/?s=${searchMovie}&apikey=1b8d7e12`
       );
-      const data = await res.json();
-      console.log(data);
-      setallMovieData(data.Search);
+      let data = await res.json();
+      console.log(data)
+
+      setallMovieData(data.Search || []); // Only set data if it exists
       console.log(allMovieData)
-      setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching data:", error);
+    } finally {
       setLoading(false);
     }
   };
+
   return (
     <div>
       <Navbar />
-
       <div className="bg">
         <SearchBar
           searchMovie={searchMovie}

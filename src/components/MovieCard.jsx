@@ -2,8 +2,16 @@
 import React from "react";
 
 export default function MovieCard({ allMovieData, loading }) {
-  <>
-    {loading ? (
+      // console.table(allMovieData);
+  return(
+  <> 
+
+
+
+    {
+      
+    loading ? (
+      // console.log("hi")
       <div className="flex justify-center">
         <img className="w-16 py-20" src="https://i.gifer.com/ZZ5H.gif" alt="" />
       </div>
@@ -12,6 +20,7 @@ export default function MovieCard({ allMovieData, loading }) {
         {
           // eslint-disable-next-line react/prop-types
           allMovieData.map((item) => {
+             console.log('hi')
             return (
               <div key={item.imdbID} className=" child p-2 lg:w-1/4 sm:w-full">
                 <div className=" sub_child bg-[#002e4b] p-3 rounded-2xl">
@@ -31,5 +40,7 @@ export default function MovieCard({ allMovieData, loading }) {
         }
       </div>
     )}
-  </>;
+  {/* </>; */}
+</>
+  )
 }
